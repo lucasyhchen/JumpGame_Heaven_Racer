@@ -103,6 +103,7 @@
       };
       document.body.appendChild(script);
     </script>
+
 <script type="text/javascript">
       // 全螢幕(暫時需要主動輸入Keycode繞過網頁權限)
       function goFullScreen() {
@@ -128,5 +129,20 @@
           window.location.href = url;  // 讓瀏覽器跳轉到指定的URL
       }
 </script>
+
+<script>
+    const originalConsoleLog = console.log;
+    console.log = function (message) {
+        if (typeof message === "string") {
+            try {
+                message = decodeURIComponent(escape(message)); // 防止非 ASCII 字符被編碼
+            } catch (e) {
+                // 轉換失敗，保持原始信息
+            }
+        }
+        originalConsoleLog(message);
+    };
+</script>
+
   </body>
 </html>
